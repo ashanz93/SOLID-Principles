@@ -10,7 +10,6 @@ import java.util.List;
 import Personnel.Employee;
 import Personnel.FullTimeEmployee;
 import Personnel.PartTimeEmployee;
-import Personnel.Subcontractor;
 
 /*
 Helper method to perform CRUD operations on employees. In a production
@@ -34,9 +33,7 @@ public class EmployeeRepository {
 		Employee steve = new PartTimeEmployee("Steve Jones", 800);
 		Employee magda = new PartTimeEmployee("Magda Iovan", 920);
 
-		Employee subcontractor = new Subcontractor("Rebekah Jackson", 3000);
-
-		return Arrays.asList(anna, billy, steve, magda, subcontractor);
+		return Arrays.asList(anna, billy, steve, magda);
 	}
 
 	public void save(Employee employee) throws IOException {

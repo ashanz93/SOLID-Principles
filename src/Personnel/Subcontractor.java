@@ -1,29 +1,28 @@
 package Personnel;
 
-public class Subcontractor extends Employee {
+// Break inheritance relationship with Employee
+public class Subcontractor {
 
-    public Subcontractor(String fullName, int monthlyIncome) {
-        super(fullName, monthlyIncome);
-    }
+	private final int monthlyIncome;
+	private int nbHoursPerWeek;
+	private String email;
+	private String name;
 
-    @Override
-    public void requestTimeOff(int nbDays, Employee manager) {
-        throw new RuntimeException("Not implemented");
-    }
+	public Subcontractor(String name, String email, int monthlyIncome, int nbHoursPerWeek) {
 
-    public boolean approveSLA(ServiceLicenseAgreement sla) {
-        /*
-        Business logic for approving a
-        service license agreement for a
-        for a subcontractor
-         */
-        boolean result = false;
-        if (sla.getMinUptimePercent() >= 98
-                && sla.getProblemResolutionTimeDays() <= 2) {
-            result=  true;
-        }
+		this.name = name;
+		this.email = email;
+		this.monthlyIncome = monthlyIncome;
+		this.nbHoursPerWeek = nbHoursPerWeek;
+	}
 
-        System.out.println("SLA approval for " + this.getFullName() + ": " + result);
-        return result;
-    }
+	public boolean approveSLA(ServiceLicenseAgreement sla) {
+		boolean result = false;
+		if (sla.getMinUptimePercent() >= 98 && sla.getProblemResolutionTimeDays() <= 2) {
+			result = true;
+		}
+
+		System.out.println("SLA approval for " + this.name + ": " + result);
+		return result;
+	}
 }
