@@ -58,5 +58,5 @@ public abstract class Employee {
         return this.firstName + " " + this.lastName;
     }
 
-    
+    public abstract void requestTimeOff(int nbDays, Employee manager);
 }
