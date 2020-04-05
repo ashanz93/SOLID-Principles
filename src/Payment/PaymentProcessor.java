@@ -2,18 +2,21 @@ package Payment;
 
 import java.util.List;
 
-import Persistence.EmployeeFileRepository;
-import Persistence.EmployeeFileSerializer;
+import Notifications.EmployeeNotifier;
+import Persistence.EmployeeRepository;
 import Personnel.Employee;
 
 public class PaymentProcessor {
 
-	private EmployeeFileRepository employeeRepository;
+	private EmployeeRepository employeeRepository;
+	private EmployeeNotifier employeeNotifier;
 
-	public PaymentProcessor() {
-		// Creation of dependencies done here
-		EmployeeFileSerializer serializer = new EmployeeFileSerializer();
-		this.employeeRepository = new EmployeeFileRepository(serializer);
+	// EmployeeRepository can be file, sql etc. EmployeeNotifier can be email,
+	// slack, sms etc.
+	public PaymentProcessor(EmployeeRepository employeeRepository, EmployeeNotifier employeeNotifier) {
+		// Inject Dependencies
+		this.employeeRepository = employeeRepository;
+		this.employeeNotifier = employeeNotifier;
 	}
 
 	public int sendPayments() {
@@ -23,8 +26,7 @@ public class PaymentProcessor {
 
 		for (Employee employee : employees) {
 			totalPayments += employee.getMonthlyIncome();
-			// Static method calls are sign of coupling
-			// EmailSender.notify(employee);
+			this.employeeNotifier.notify(employee);
 		}
 
 		return totalPayments;

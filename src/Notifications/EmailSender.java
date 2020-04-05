@@ -14,8 +14,8 @@ import javax.mail.internet.MimeMultipart;
 
 import Personnel.Employee;
 
-public class EmailSender {
-	public static void notify(Employee employee) {
+public class EmailSender implements EmployeeNotifier {
+	public void notify(Employee employee) {
 		// Configure email server
 		Properties prop = new Properties();
 		prop.put("mail.smtp.auth", true);
