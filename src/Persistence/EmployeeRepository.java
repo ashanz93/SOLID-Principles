@@ -9,6 +9,7 @@ import java.util.List;
 
 import Personnel.Employee;
 import Personnel.FullTimeEmployee;
+import Personnel.Intern;
 import Personnel.PartTimeEmployee;
 
 /*
@@ -33,7 +34,10 @@ public class EmployeeRepository {
 		Employee steve = new PartTimeEmployee("Steve Jones", 800);
 		Employee magda = new PartTimeEmployee("Magda Iovan", 920);
 
-		return Arrays.asList(anna, billy, steve, magda);
+		Employee john = new Intern("John Lee", 300, 10);
+		Employee catherine = new Intern("Catherine Allison", 500, 15);
+
+		return Arrays.asList(anna, billy, steve, magda, john, catherine);
 	}
 
 	public void save(Employee employee) throws IOException {
