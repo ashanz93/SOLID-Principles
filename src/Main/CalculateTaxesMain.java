@@ -5,38 +5,38 @@ import java.util.List;
 import java.util.Locale;
 
 import Logging.ConsoleLogger;
+import Persistence.EmployeeFileRepository;
 import Persistence.EmployeeFileSerializer;
-import Persistence.EmployeeRepository;
 import Personnel.Employee;
 import Taxes.TaxCalculator;
 import Taxes.TaxCalculatorFactory;
 
 public class CalculateTaxesMain {
-    public static void main(String[] args) {
-        // Create dependencies
-        ConsoleLogger consoleLogger = new ConsoleLogger();
-        EmployeeFileSerializer employeeFileSerializer = new EmployeeFileSerializer();
-        EmployeeRepository repository = new EmployeeRepository(employeeFileSerializer);
+	public static void main(String[] args) {
+		// Create dependencies
+		ConsoleLogger consoleLogger = new ConsoleLogger();
+		EmployeeFileSerializer employeeFileSerializer = new EmployeeFileSerializer();
+		EmployeeFileRepository repository = new EmployeeFileRepository(employeeFileSerializer);
 
-        // Grab employees
-        List<Employee> employees = repository.findAll();
+		// Grab employees
+		List<Employee> employees = repository.findAll();
 
-        // Calculate taxes
-        Locale locale = new Locale("en", "US");
-        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+		// Calculate taxes
+		Locale locale = new Locale("en", "US");
+		NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
 
-        double totalTaxes = 0;
-        for (Employee employee: employees){
-            TaxCalculator taxCalculator = TaxCalculatorFactory.create(employee);
+		double totalTaxes = 0;
+		for (Employee employee : employees) {
+			TaxCalculator taxCalculator = TaxCalculatorFactory.create(employee);
 
-            // compute individual tax
-            double tax = taxCalculator.calculate(employee);
-            String formattedTax = currencyFormatter.format(tax);
-            consoleLogger.writeInfo(employee.getFullName() + " taxes: " + formattedTax);
+			// compute individual tax
+			double tax = taxCalculator.calculate(employee);
+			String formattedTax = currencyFormatter.format(tax);
+			consoleLogger.writeInfo(employee.getFullName() + " taxes: " + formattedTax);
 
-            // add to company total taxes
-            totalTaxes += taxCalculator.calculate(employee);
-        }
-        consoleLogger.writeInfo("Total taxes = " + currencyFormatter.format(totalTaxes));
-    }
+			// add to company total taxes
+			totalTaxes += taxCalculator.calculate(employee);
+		}
+		consoleLogger.writeInfo("Total taxes = " + currencyFormatter.format(totalTaxes));
+	}
 }

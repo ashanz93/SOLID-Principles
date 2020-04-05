@@ -3,8 +3,8 @@ package Main;
 import java.util.List;
 
 import Logging.ConsoleLogger;
+import Persistence.EmployeeFileRepository;
 import Persistence.EmployeeFileSerializer;
-import Persistence.EmployeeRepository;
 import Personnel.Employee;
 import Personnel.FullTimeEmployee;
 
@@ -14,7 +14,7 @@ public class NatHolidayEmployeeTimeOffMain {
 		// Create dependencies
 		ConsoleLogger consoleLogger = new ConsoleLogger();
 		EmployeeFileSerializer employeeFileSerializer = new EmployeeFileSerializer();
-		EmployeeRepository repository = new EmployeeRepository(employeeFileSerializer);
+		EmployeeFileRepository repository = new EmployeeFileRepository(employeeFileSerializer);
 
 		// Grab employees
 		List<Employee> employees = repository.findAll();
