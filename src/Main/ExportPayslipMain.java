@@ -22,8 +22,8 @@ public class ExportPayslipMain {
 		for (Employee employee : employees) {
 			Payslip payslip = new Payslip(employee, Month.AUGUST);
 
-			byte[] exportablePdf = payslip.toPdf();
-			System.out.println(exportablePdf);
+			String exportableText = payslip.toTxt();
+			System.out.println(exportableText);
 		}
 	}
 }
